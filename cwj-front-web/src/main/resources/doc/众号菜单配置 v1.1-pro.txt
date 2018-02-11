@@ -1,0 +1,70 @@
+在线配置微信菜单：https://mp.weixin.qq.com/debug/cgi-bin/apiinfo
+1.选择基础支撑->获取accesstoken->输入appid、app-secret   ===>获取accesstoken
+2.选择自定义菜单->自定义创建菜单->输入1中获取的token->输入菜单json数据
+
+APPID=wx8707e665d600a44a
+APPKEY=e09870c0ed1545c3dbacebaa09dddd8f
+
+以下是pbyt 测试环境菜单json数据
+
+{
+    "button": [
+       
+        {
+            "name": "生成打赏", 
+            "sub_button": [
+                {
+                    "type": "view", 
+                    "name": "生成打赏照片", 
+                    "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8707e665d600a44a&redirect_uri=http%3a%2f%2fkangxinyiju.top%2fwechat%2fcallback&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect"
+                }, 
+                {
+                    "type": "view", 
+                    "name": "生成打赏视频", 
+                    "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8707e665d600a44a&redirect_uri=http%3a%2f%2fkangxinyiju.top%2fwechat%2fcallback&response_type=code&scope=snsapi_base&state=6&connect_redirect=1#wechat_redirect"
+                }, 
+                {
+                    "type": "view", 
+                    "name": "我的上传", 
+                    "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8707e665d600a44a&redirect_uri=http%3a%2f%2fkangxinyiju.top%2fwechat%2fcallback&response_type=code&scope=snsapi_base&state=4&connect_redirect=1#wechat_redirect"
+                },
+                  {
+                    "type": "view", 
+                    "name": "我打赏的照片", 
+                    "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8707e665d600a44a&redirect_uri=http%3a%2f%2fkangxinyiju.top%2fwechat%2fcallback&response_type=code&scope=snsapi_base&state=11&connect_redirect=1#wechat_redirect"
+                },
+				{
+                    "type": "view", 
+                    "name": "打赏圈", 
+                    "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8707e665d600a44a&redirect_uri=http%3a%2f%2fkangxinyiju.top%2fwechat%2fcallback&response_type=code&scope=snsapi_base&state=5&connect_redirect=1#wechat_redirect"
+                }
+            ]
+		},
+		
+		{
+            "name": "收获赏金", 
+            "sub_button": [
+                {
+                    "type": "view", 
+                    "name": "赏金提现", 
+                    "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8707e665d600a44a&redirect_uri=http%3a%2f%2fkangxinyiju.top%2fwechat%2fcallback&response_type=code&scope=snsapi_base&state=10&connect_redirect=1#wechat_redirect"
+                }, 
+                {
+                    "type": "view", 
+                    "name": "收支明细", 
+                    "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8707e665d600a44a&redirect_uri=http%3a%2f%2fkangxinyiju.top%2fwechat%2fcallback&response_type=code&scope=snsapi_base&state=8&connect_redirect=1#wechat_redirect"
+                }, 
+                {
+                    "type": "view", 
+                    "name": "我的推荐", 
+                    "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8707e665d600a44a&redirect_uri=http%3a%2f%2fkangxinyiju.top%2fwechat%2fcallback&response_type=code&scope=snsapi_base&state=9&connect_redirect=1#wechat_redirect"
+                },
+				{
+                    "type": "view", 
+                    "name": "联系客服", 
+                    "url": "http://kangxinyiju.top/wx_customer.html"
+                }
+            ]
+		}
+    ]
+}

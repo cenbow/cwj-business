@@ -1,0 +1,82 @@
+package com.mm.dev.service.user;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import com.mm.dev.common.base.service.BaseService;
+import com.mm.dev.entity.user.User;
+import com.mm.dev.entity.user.UserFiles;
+
+/**
+ * @Description: IuserService
+ * @author Jacky
+ * @date 2017年8月4日 下午10:04:02
+ */
+public interface IUserService extends BaseService<User>{
+	
+	/**
+	 * @Description: 根据ID查询
+	 * @Datatime 2017年8月5日 下午6:19:51 
+	 * @return User    返回类型
+	 */
+    User getUser(String id) throws Exception;
+    
+    /**
+     * @Description: 分页查询列表
+     * @Datatime 2017年8月5日 下午6:15:42 
+     * @return Page<User>    返回类型
+     */
+    Page<User> getAll(Pageable pageable) throws Exception;
+
+    /**
+	 * 关注保存用户信息
+	 * @param toUserName
+	 */
+	public void weixinRegister(HttpServletRequest request,String openId,String attention) throws Exception;
+	
+	/**
+	 * 取消关注保存用户信息
+	 * @param toUserName
+	 */
+	public void unSubscribe(String openId) throws Exception;
+	
+	/**
+	 * @Description: 根据openId更新用户账户信息
+	 * @DateTime:2017年11月9日 上午9:42:51
+	 * @return void
+	 * @throws
+	 */
+	public void updateUserBalanceInfoByOpenId(User user) throws Exception;
+	
+	/**
+	 * 根据openId查询会员ID
+	 * @param openId
+	 * @return
+	 * @throws Exception
+	 */
+	public User queryUserBaseInfoByopenId(String openId) throws Exception;
+	
+	/**
+	 * @Description: 根据openId获取用户账号信息
+	 * @Datatime 2017年8月5日 下午3:16:51 
+	 * @return void    返回类型
+	 */
+	public User queryUserBalanceInfoByOpenId(String openId) throws Exception;
+	
+	/**
+	 * @Description:朋友圈首页分页查询列表
+	 * @Datatime 2017年8月6日 下午9:42:44 
+	 * @return List<UserFiles>    返回类型
+	 */
+	public Page<UserFiles> queryUserFilesList(String openId,Pageable pageable) throws Exception;
+	
+	/**
+	 * @Description: 根据openId查询已支付的订单明细
+	 * @DateTime:2017年11月9日 上午10:41:10
+	 * @return OrderPayment
+	 * @throws
+	 */
+	public Page<UserFiles> queryOrderPaymentUserFilesByOpenId(String openId,Pageable pageable) throws Exception;
+}

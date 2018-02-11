@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>上传图片</title>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+<link rel="stylesheet" href="css/weui.css">
+<link rel="stylesheet" type="text/css" href="css/api.css"/>
+<link rel="stylesheet" href="css/upload.css">
+		<script type="text/javascript">
+			 //图片居中显示  
+			function center_img(dom) {
+				dom.style.visibility = 'hidden';
+				var pWideth = dom.parentNode.offsetWidth;
+				var pHeight = dom.parentNode.offsetHeight;
+				var Wideth = dom.width;
+				var Height = dom.height;
+				if(Wideth >= Height){
+					dom.width = pWideth;
+					alert(dom.height);
+					if(dom.height >= pHeight){
+						dom.width = dom.width * pHeight / dom.height;
+						dom.height = pHeight;	
+					}	
+				}else{
+					dom.height = pHeight;
+					alert(dom.height);
+					if(dom.width >= pWideth){
+						dom.height = dom.height * pWideth / dom.width;
+						dom.width = pWideth;	
+					}	
+				}
+				dom.style.marginLeft = (pWideth - dom.width) / 2 + 'px';
+				dom.style.marginTop = (pHeight - dom.height) / 2 + 'px';
+				dom.style.visibility = 'visible';
+			}
+		</script>
+</head>
+<body>
+	<div id="uploader" class="wu-example" style="text-align: center;margin-top: 20px;">
+	    <div id="thelist" class="uploader-list"></div>
+	    <div class="btns">
+	        <div id="picker" style="overflow: hidden;width: 180px;height: 180px;margin: auto;">
+	        	<div class="erweima">			
+					<img id="erweimaImg" src="" onload="center_img(this)" />
+				</div>
+	        </div>
+	    </div>
+	</div>
+					
+	<div class="main-box">
+		<div class="weui-cells">
+			<div class="weui-cell">
+				<div class="weui-cell__hd">
+					<label class="weui-label">标题</label>
+				</div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" type="text" id="title" name="title" value="" placeholder="请输入标题">
+				</div>
+			</div>
+			
+			<div class="weui-cell">
+				<div class="weui-cell__hd">
+					<label class="weui-label">描述</label>
+				</div>
+				<div class="weui-cell__bd">
+			      <textarea class="weui-textarea" id="descr" name="descr" value="" placeholder="请准确描述图片内容" rows="3"></textarea>
+			      <div class="weui-textarea-counter"><span>0</span>/200</div>
+			    </div>
+			</div>
+			
+			<div
+				class="weui-cell weui-cell_select weui-cell_select-after withdraw_select">
+				<div class="weui-cell__hd">
+					<label for="" class="weui-label">模糊度</label>
+				</div>
+				<div class="weui-cell__bd">
+					<select class="weui-select" name="blur" id="blur">
+						<option value="60">60</option>
+						<option value="70">70</option>
+						<option value="80">80</option>
+						<option value="90">90</option>
+						<option value="100">100</option>
+					</select>
+				</div>
+			</div>
+			
+			<!--隐含元素，用于接收按钮的状态，一定要设置成checked提交才有效，否则提交的信息无法被php获取-->
+        	<input hidden="hidden" id="random" name="random" type="radio" value="2" checked="checked" />
+			<div class="weui-cell weui-cell_switch">
+			    <div class="weui-cell__bd">随机</div>
+			    <div class="weui-cell__ft">
+			      <input class="weui-switch" id="random-switch" type="checkbox">
+			    </div>
+			</div>
+			
+			<div
+				class="weui-cell weui-cell_select weui-cell_select-after withdraw_select">
+				<div class="weui-cell__hd">
+					<label for="" class="weui-label">价格</label>
+				</div>
+				<div class="weui-cell__bd">
+					<select class="weui-select" name="price" id="price">
+						<option value="1">1元</option>
+						<option value="2">2元</option>
+						<option value="3">3元</option>
+						<option value="5">5元</option>
+						<option value="10">10元</option>
+						<option value="15">15元</option>
+						<option value="20">20元</option>
+						<option value="25">25元</option>
+						<option value="30">30元</option>
+						<option value="40">40元</option>
+						<option value="50">50元</option>
+						<option value="60">60元</option>
+						<option value="70">70元</option>
+						<option value="80">80元</option>
+						<option value="90">90元</option>
+						<option value="100">100元</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<label class="weui-agree"> 
+			<span class="weui-agree__text">
+				<p>1.请准确填写标题，与图片不符会被删除。</p>
+				<p>2.请认真填写信息，一经确认不允许修改。</p>
+				<p>3.最大可以上传<b>10M</b>的图片文件。</p>
+			</span>
+			<section style="margin-top: 0.6em;">
+				<div class="icon_sp_area" style="float: left;">
+					<i class="weui-icon-warn"></i>
+				</div>
+				<span style="color: red; font-size: 16px; float: left; display: block;">严禁上传违规视频</span>
+			</section>
+		</label>
+	</div>
+	<div class="btn" id="ctlBtn">上传</div>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	<script src="js/weui.min.js"></script>
+	<script src="js/jquery_v2.1.4.min.js"></script>
+	<script src="js/myc.js"></script>
+	<script src="js/webuploader.js"></script>
+	<script src="js/wx_upload_photo.js"></script>
+</body>
+</html>

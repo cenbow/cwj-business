@@ -1,0 +1,17 @@
+html, body {
+	background-color: #fff;
+}
+
+.sceneUrl {
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 100px;
+}
+
+.sceneUrl>img {
+	width: 100%;
+}
+
+.right {
+	float: right;
+}

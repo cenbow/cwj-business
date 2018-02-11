@@ -1,0 +1,24 @@
+.main-box {
+	margin: 20px 15px 30px;
+}
+
+.tips_btn {
+	position: relative;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 14px;
+	padding-right: 14px;
+	border: 1px solid #1aad19;
+	box-sizing: border-box;
+	font-size: 18px;
+	text-align: center;
+	text-decoration: none;
+	color: #1aad19;
+	line-height: 2.55555556;
+	border-radius: 5px;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+}

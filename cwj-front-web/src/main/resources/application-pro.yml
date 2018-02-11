@@ -1,0 +1,70 @@
+#生产环境配置
+server:
+  #端口
+  port: 80
+  context-path: /
+spring:
+  mybatis:
+    mapperPackage: /mapper/*/*Mapper.xml
+    dialect: mysql  
+  jpa:  
+    database: mysql  
+    show-sql: true  
+#    hibernate:  
+#      ddl-auto: update  
+  datasource:  
+      url: jdbc:mysql://rm-wz91c2ybx4gc6inbfo.mysql.rds.aliyuncs.com:3306/ivplay?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowMultiQueries=true  
+      username: root  
+      password: ${password}
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 15  
+    host: localhost  
+    port: 6379  
+    password:
+    # 连接超时时间（毫秒）
+    timeout: 0  
+    pool:
+      # 连接池最大连接数（使用负值表示没有限制）  
+      max-active: 8
+      # 连接池中的最大空闲连接  
+      max-idle: 8
+      # 连接池中的最小空闲连接  
+      min-idle: 0  
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: 10000
+#日志
+logging:
+  config: classpath:logback-jk.xml
+  path: log
+
+#数据库密码加密
+#java -cp druid-1.0.24.jar com.alibaba.druid.filter.config.ConfigTools 你的密码
+publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAM4+d6e979vTXSYv09St+6L7vUlCJuZq0EhzPWsO2haNpn2YHeLsovG0z/Hmh+TwjTu+P4YZiNlCcgOE/mXaZ1MCAwEAAQ==
+password: fcbEjBG0qpPNg6dy3x4F2GkCVs3VDl6gIlKTH9lB4cW+bAPWVchliUOEVgsYRP7dxczy9H0z7t0EQDdL6Ov1Mg==
+
+
+PLAY:
+  UPLOAD:
+    IMAGE:
+      PATH: /usr/local/tomcat/webapps/upload
+      SIZE: 10485760
+      FILESUFFIX: png
+      SUFFIXS: jpg,jpeg,bmp,png,JPG,JPEG,BMP,PNG
+    VIDEO:
+      SIZE: 104857600
+      SUFFIXS: mp4,flv,rmvb,avi,MP4,FLV,RMVB,AVI
+  BLURIMAGE: 
+    WIDTH: 600
+    HEIGHT: 600
+    BLUR: 60
+    SMALLBLUR: 10
+    PRICE: 3
+    PRICEMIN: 2
+    RANDOM: 1
+    SCALE: 0.2
+  WECHAT: 
+    APPID: wx8707e665d600a44a
+    APPKEY: ENC(DMivSkE2piCRpUdvOaM5Zm6VHxXbYuR/dy0fj83UNIlA6Lpa79qbAimmA7EzQ4C+)
+    HOST: kangxinyiju.top
+    MCHID: 1487008162

@@ -1,0 +1,52 @@
+<?xml version="1.0"  encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mm.dev.dao.mapper.order.OrderPaymentMapper">
+
+	<update id="updateByOrderNo">
+		update 
+			t_order_payment t 
+		set 
+			payment_bank = #{paymentBank},
+			payment_status = #{paymentStatus},
+			payment_method = #{paymentMethod},
+			payment_time = #{paymentTime},
+			update_time = now()
+		where
+			t.order_no = #{orderNo}
+	</update>
+	
+	<resultMap type="com.mm.dev.entity.order.OrderPayment" id="orderPaymentResultMap">
+		<id column="order_no" property="orderNo"/>
+		<result column="amount" property="amount"/>
+		<result column="payer" property="payer"/>
+		<collection property="orderItemPaymentList" resultMap="orderItemPaymentResultMap"></collection>
+	</resultMap>
+	
+	<resultMap type="com.mm.dev.entity.order.OrderItemPayment" id="orderItemPaymentResultMap">
+		<id column="oid" property="id"/>
+		<result column="product_id" property="productId"/>
+		<association property="userFiles" resultMap="userFilesResultMap"></association>
+	</resultMap>
+	
+	<resultMap type="com.mm.dev.entity.user.UserFiles" id="userFilesResultMap">
+		<id column="open_id" property="openId"/>
+	</resultMap>
+	
+	<select id="findOrderPayment" resultMap="orderPaymentResultMap">
+		SELECT 
+			o.order_no,
+			o.`amount`,
+			o.`payer`,
+			oi.id as oid,
+			oi.`product_id`,
+			f.`open_id`
+		FROM t_order_payment o 
+		JOIN t_order_item_payment oi ON o.`id` = oi.`order_id` 
+		JOIN t_user_files f ON oi.`product_id` = f.`id`
+		WHERE 
+			o.`order_no` = #{orderNo} 
+		AND 
+			o.`payment_status` = 2
+	</select>
+   
+</mapper>

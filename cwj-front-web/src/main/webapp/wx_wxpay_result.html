@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,user-scalable=0">
+<title>支付结果</title>
+<link rel="stylesheet" href="css/weui.min.css">  
+<link rel="stylesheet" href="css/jquery-weui.css">
+</head>
+<body ontouchstart="">
+	<div class="main-box">
+		<div class="weui-msg">
+			<div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+		  		<div class="weui-msg__text-area">
+				    <h2 class="weui-msg__title">支付成功</h2>
+				    <p class="weui-msg__desc">
+				    	<div class="weui-form-preview">
+					  		<div class="weui-form-preview__hd">
+							    <label class="weui-form-preview__label">付款金额</label>
+							    <em class="weui-form-preview__value" id="price">0.00</em>
+					  		</div>
+					  		<div class="weui-form-preview__bd">
+							    <div class="weui-form-preview__item">
+							      <label class="weui-form-preview__label">标题</label>
+							      <span class="weui-form-preview__value" id="title"></span>
+							    </div>
+							    <div class="weui-form-preview__item">
+							      <label class="weui-form-preview__label">描述</label>
+							      <span class="weui-form-preview__value" id="descr"></span>
+							    </div>
+						  	</div>
+						</div>
+				    </p>
+		  		</div>
+			  	<div class="weui-msg__opr-area">
+				    <p class="weui-btn-area">
+			      		<a href="###"  id="toFilePath" class="weui-btn weui-btn_primary">点我欣赏</a>
+			      		<a href="###"  id="toAttention" class="weui-btn weui-btn_primary">我也要玩</a>
+				    </p>
+			  	</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/zepto.min.js"></script>
+	<script src="js/jquery-weui.js"></script>
+	<script src="js/weui.min.js"></script>
+	<script src='js/swiper.js' ></script>
+	<script src="js/fastclick.js"></script>
+	<script src="js/myc.js"></script>
+	<script src="js/wx_wxpay_result.js"></script>
+	<script>
+		  $(function() {
+		    FastClick.attach(document.body);
+		  });
+	</script>
+</body>
+</html>

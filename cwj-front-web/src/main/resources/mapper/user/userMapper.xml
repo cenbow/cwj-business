@@ -1,0 +1,219 @@
+<?xml version="1.0"  encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mm.dev.dao.mapper.user.UserMapper">
+
+    <resultMap id="userFilesMap" type="com.mm.dev.entity.user.User">
+        <id property="id" column="uid" />
+        <result property="nickName" column="nick_name" />
+        <result property="openId" column="open_id" />
+        <result property="sex" column="sex" />
+        <result property="headimgurl" column="headimgurl" />
+        <collection property="userFilesList" resultMap="userFilesResultMap"></collection>
+    </resultMap>
+	
+	<resultMap type="com.mm.dev.entity.user.UserFiles" id="userFilesResultMap">
+    	<id property="id" column="ufid"/>
+       	<result property="fileNewNames" column="file_new_names"/>
+       	<result property="fileNewNames" column="file_new_names"/>
+       	<result property="fileSuffic" column="file_suffic"/>
+       	<result property="fileSuffic" column="file_suffic"/>
+       	<result property="filePath" column="file_path"/>
+       	<result property="title" column="title"/>
+	</resultMap>
+    <sql id="baseColumn">
+    	id,
+    	nick_name as nickName,
+    	sex,
+    	open_id as openId,
+    	phone,
+    	user_name as userName,
+    	pass_word as passWord,
+    	headimgurl,
+    	rank,
+    	type,
+    	country,
+    	province,
+    	city,
+    	attenation,
+    	un_attenation as unAttenation,
+    	last_login_ip_address as lastLoginIpAddress
+    </sql>
+    
+    <insert id="save">
+    	insert t_user (
+    		id,
+	    	nick_name,
+	    	sex,
+	    	open_id,
+	    	phone,
+	    	user_name,
+	    	pass_word,
+	    	headimgurl,
+	    	country,
+	    	province,
+	    	city,
+	    	attenation,
+	    	un_attenation,
+	    	last_login_ip_address
+	    	)
+    	value (
+    		#{id},
+	    	#{nickName},
+	    	#{sex},
+	    	#{openId},
+	    	#{phone},
+	    	#{userName},
+	    	#{passWord},
+	    	#{headimgurl},
+	    	#{country},
+	    	#{province},
+	    	#{city},
+	    	#{attenation},
+	    	#{unAttenation},
+	    	#{lastLoginIpAddress}
+    	)
+    </insert>
+    
+    <select id="queryUserBaseInfoByopenId" resultType="com.mm.dev.entity.user.User">
+    	SELECT
+    		t.nick_name as nickName,
+    		t.headimgurl,
+    		t.sex
+   		FROM
+   			t_user t
+		WHERE
+   			t.open_id = #{openId}
+    </select>
+    
+    <select id="queryUserBalanceInfoByOpenId" resultType="com.mm.dev.entity.user.User">
+    	SELECT
+    		t.id,
+<!--     		t.nick_name as nickName, -->
+<!--     		t.headimgurl, -->
+			t.open_id as openId,
+    		t.balance,
+    		t.withdraw_balance as withdrawBalance,
+    		t.fee_scale as feeScale,
+    		t.withdraw_day_limit as withdrawDayLimit,
+<!--     		t.total_income as totalIncome, -->
+    		t.withdraw_day_max_money as withdrawDayMaxMoney
+   		FROM
+   			t_user t
+		WHERE
+   			t.open_id = #{openId}
+    </select>
+
+    <update id="updateUserInfo">
+    	UPDATE 
+    		t_user t
+   		<set>
+   			<if test="attenation != null and attenation != ''">
+	   			t.`attenation` = #{attenation},
+   			</if>
+   			<if test="unAttenation != null and unAttenation != ''">
+	   			t.`un_attenation` = #{unAttenation},
+   			</if>
+   			<if test = "headimgurl != null and headimgurl != ''">
+	   			t.headimgurl = #{headimgurl},
+   			</if>
+   			<if test = "sex != null and sex != ''">
+	   			t.sex = #{sex},
+   			</if>
+   			<if test = "nickName != null and nickName != ''">
+	   			t.nick_name = #{nickName},
+   			</if>
+   			t.update_time = now()
+   		</set>
+   		WHERE 
+   			t.`open_id` = #{openId}
+    </update>
+    
+    <select id="queryUserFilesList"  parameterType="string"  resultType="com.mm.dev.entity.user.UserFiles">
+    	SELECT
+			t.`nick_name` as "user.nickName",
+			t.`open_id` as "openId",
+			t. sex as `user.sex`,
+			t.headimgurl as `user.headimgurl`,
+			t2.id,
+			t2.`file_new_names` as "fileNewNames",
+			t2.`file_suffic` as "fileSuffic",
+			t2.`file_path` as "filePath",
+			t2.small_file_path as smallFilePath,
+			t2.small_blur_file_path as smallBlurFilePath,
+			t2.blur_file_path as blurFilePath,
+			t2.title,
+			t2.create_time as createTime,
+			t2.descr,
+			t2.file_category as fileCategory
+		FROM 
+			t_user t 
+		LEFT JOIN 
+			t_user_files t2 
+		ON 
+			t.open_id = t2.open_id
+		<where>
+			t2.`del_flag` =1 AND t.`del_flag` = 1 
+			<if test="openId != null and openId != ''">
+				AND	t2.open_id = #{openId}
+			</if>
+		</where>			
+		ORDER BY t2.`update_time` DESC
+    </select>
+    
+    <update id="updateUserBalanceInfoByOpenId">
+    	UPDATE 
+    		t_user u
+		SET 
+			<if test="balance != null and balance != ''">
+				u.`balance` = u.`balance` + #{balance},
+			</if>
+			<if test="totalIncome != null and totalIncome != ''">
+				u.`total_income` = u.`total_income` + #{totalIncome},
+			</if>
+			<if test="withdrawBalance != null and withdrawBalance != ''">
+				u.`withdraw_balance` = u.`withdraw_balance` + #{withdrawBalance},
+			</if>
+			u.update_time = now()
+		WHERE 
+			u.`open_id` = #{openId}
+    </update>
+    
+    <select id="queryOrderPaymentUserFilesByOpenId" parameterType="string"  resultType="com.mm.dev.entity.user.UserFiles">
+		SELECT 
+			u.`nick_name` AS "user.nickName",
+			u.`open_id` AS "openId",
+			u. sex AS `user.sex`,
+			u.headimgurl AS `user.headimgurl`,
+			uf.id,
+			uf.`file_new_names` AS "fileNewNames",
+			uf.`file_suffic` AS "fileSuffic",
+			uf.`file_path` AS "filePath",
+			uf.small_file_path AS smallFilePath,
+			uf.small_blur_file_path AS smallBlurFilePath,
+			uf.blur_file_path AS blurFilePath,
+			uf.title,
+			uf.create_time AS createTime,
+			uf.descr,
+			uf.file_category AS fileCategory
+		FROM 
+			t_order_payment o 
+		LEFT JOIN 
+			t_order_item_payment oi ON o.`id` = oi.`order_id` 
+		LEFT JOIN 
+			t_user_files uf ON oi.`product_id` = uf.`id`
+		JOIN 
+			t_user u ON uf.`open_id` = u.`open_id`
+		WHERE 
+			u.`del_flag` =1 
+		AND
+			uf.`del_flag` = 1 
+		AND
+			o.`payment_status` = 2
+		AND
+			o.`payer` = #{openId}
+		GROUP BY 
+			uf.`id`
+		ORDER BY
+			uf.`update_time` DESC
+	</select>
+</mapper>

@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>打赏圈</title>
+<!-- head 中 -->
+<link rel="stylesheet" href="css/weui.min.css">  
+<link rel="stylesheet" href="css/jquery-weui.css">
+<link rel="stylesheet" href="css/index.css">
+<style>
+  .swiper-container {
+    width: 100%;
+  } 
+
+  .swiper-slide-image {
+    width: 100%;
+    height:210px;
+  }
+</style>
+</head>
+
+<body style="background-color: #fff;">
+ 	
+	<!-- body 顶部加上如下代码 -->
+	<div class="weui-pull-to-refresh__layer">
+	  <div class='weui-pull-to-refresh__arrow'></div>
+	  <div class='weui-pull-to-refresh__preloader'></div>
+	  <div class="down">下拉刷新</div>
+	  <div class="up">释放刷新</div>
+	  <div class="refresh">正在刷新</div>
+	</div>
+	<div id="_contain">
+<!-- 		<div class="banner" style="position: relative;"> -->
+<!-- 			<div class="top_bg"></div> -->
+<!-- 			<div style="width:80px; height:80px;position: absolute;background-color: #F3F3F7;right: 10px;bottom: -30px;"> -->
+<!-- 				<img id="userHeadimgurl"  src="img/tx2.jpg" style="width:96%; margin: 2%;"> -->
+<!-- 			</div> -->
+<!-- 			<div id="userNickName" style="position: absolute;right: 100px;bottom: 10px;color: white;"> -->
+<!-- 				看图打赏 -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+		
+		<div class="swiper-container swiper-container-horizontal">
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper" style="transform: translate3d(-2202px, 0px, 0px); transition-duration: 0ms;">
+				  <!-- Slides -->
+				  <div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="0" style="width: 1101px;"><img class="swiper-slide-image" src="img/swiper-1.jpg"></div>
+				  <div class="swiper-slide swiper-slide-active" data-swiper-slide-index="1" style="width: 1101px;"><img class="swiper-slide-image" src="img/swiper-2.jpg"></div>
+				  <div class="swiper-slide swiper-slide-next" data-swiper-slide-index="2" style="width: 1101px;"><img class="swiper-slide-image" src="img/swiper-3.jpg"></div>
+			<div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="0" style="width: 1101px;"><img class="swiper-slide-image" src="img/swiper-1.jpg"></div></div>
+			<!-- If we need pagination -->
+<!-- 			<div class="swiper-pagination swiper-pagination-bullets"><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span></div> -->
+		</div>
+
+		<div class="contain" style="margin: 40px 0 0;">
+			<ul id="recodesLeft">
+				<script id="tmprecodes_left" type="text/x-dot-template">
+					<li>
+						<div class="body">
+							<div class="logo">
+								<a onclick="openMyHome('{{=it.openId}}')" href="javascript:void(0)"><img src="{{=it.headimgurl}}"></a>
+							</div>
+							<div class="text">
+								<div id="title" class="title">{{=it.nickName}}</div>
+								<div id="content" class="txt">
+										{{=it.descr}}
+								</div>
+                                {{? it.fileCategory == 2}}
+								<div class="my-gallery" data-pswp-uid="{{=it.index}}">
+									<figure>
+										<span>
+											  <a href="###" data-size="670x712" onclick="payVideoTip('{{=it.key}}')">
+                                                    <video id="{{=it.key}}video" preload="auto" width="100%" poster="img/1.jpg">
+														<source src="{{=it.blurUrl}}" type='video/mp4' />
+													</video>
+											  </a>
+									  	</span>
+									</figure>
+								  </div>
+								{{??}}	
+                                   <div class="my-gallery" data-pswp-uid="{{=it.index}}">
+									<figure>
+										<span>
+											  <a id="{{=it.key}}" href="###" data-size="69x128">
+											  		<img style="" src="{{=it.blurUrl}}">
+											  </a>
+									  	</span>
+									</figure>
+								  </div>
+                                {{?}}
+									<div class="tm">
+										<div class="fl" >{{=it.createTime}}</div>
+										<div class="fr"><a style="color: #88B1C5;" onclick="openBlurPay('{{=it.key}}')" href="javascript:void(0)">打赏</a></div>
+										<div class="fr"><a style="color: #88B1C5;" onclick="openBlurShare('{{=it.key}}')" href="javascript:void(0)">分享</a></div>
+									</div>
+							</div>
+						</div>
+					</li>
+				</script>
+			</ul>
+		</div>
+	</div>
+<div class="weui-loadmore" >    
+    <i class="weui-loading"></i>    
+    <span class="weui-loadmore__tips">正在加载</span>    
+</div>
+<div class="weui-loadmore weui-loadmore_line" id="dot_data" style="display: none;">
+  <span class="weui-loadmore__tips">没有更多</span>
+</div>
+<script src="js/jquery_v2.1.4.min.js"></script>  
+<script src="js/jquery-weui.js"></script>
+<script src="js/weui.min.js"></script>
+<script src='js/swiper.js' ></script>
+<script src="js/fastclick.js"></script>
+<script src="js/dot.min.js"></script>
+<script src="js/myc.js"></script>
+<script src="js/wx_wxpay_result.js"></script>
+<script>
+	  $(function() {
+	    FastClick.attach(document.body);
+	  });
+	  
+	  $(".swiper-container").swiper({
+	        loop: true,
+	        autoplay: 3000
+	      });
+</script>
+<script src="js/index.js"></script>
+</body>
+</html>

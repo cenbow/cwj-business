@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,user-scalable=0">
+<title>赏金提现</title>
+<link rel="stylesheet" href="css/weui.css">
+</head>
+<body ontouchstart="">
+	<div class="main-box">
+		<div class="page__bd">
+			<div class="weui-cells__title">余额信息</div>
+			<div class="weui-cells">
+				<div class="weui-cell">
+					<div class="weui-cell__bd">
+						<p>当前余额</p>
+					</div>
+					<div class="weui-cell__ft"  id="money_num"></div>
+				</div>
+			</div>
+
+			<div class="weui-cells__title">提现规则</div>
+			<div class="weui-cells">
+				<div class="weui-cell">
+					<div class="weui-cell__bd">
+						<p>最低提现</p>
+					</div>
+					<div class="weui-cell__ft">50</div>
+				</div>
+				<div class="weui-cell">
+					<div class="weui-cell__bd">
+						<p>最高提现</p>
+					</div>
+					<div class="weui-cell__ft"  id="withdrawDayMaxMoney"></div>
+				</div>
+				<div class="weui-cell">
+					<div class="weui-cell__bd">
+						<p>每日限提</p>
+					</div>
+					<div class="weui-cell__ft"  id="withdrawDayLimit"></div>
+				</div>
+			</div>
+			
+			<div class="weui-cells__title">提现信息</div>
+			<div class="weui-cells">
+				<div class="weui-cell">
+					<div class="weui-cell__bd">
+						<p>提现金额</p>
+					</div>
+					<div class="weui-cell__ft" >
+						<input class="weui-input"  type="number"  id="moneyInput"  style="text-align: right;" name="balance"   placeholder="请输入提现金额">
+					</div>
+				</div>
+			</div>
+
+			<label class="weui-agree"> <span class="weui-agree__text">
+					<p>系统扣除<b id="feeScale">10</b>%手续费，请注意到账通知！</p>
+					<p>将在1~3个工作日完成提现的发放！</p>
+			</span>
+			</label>
+
+			<div class="weui-btn-area">
+				<a class="weui-btn weui-btn_primary" href="javascript:;"  id="tixianBtn">确定</a>
+			</div>
+		</div>
+	</div>
+	<script src="js/zepto.min.js"></script>
+	<script src="js/weui.min.js"></script>
+	<script src="js/myc.js"></script>
+	<script src="js/wx_withdraw.js"></script>
+</body>
+</html>

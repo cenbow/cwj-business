@@ -1,0 +1,72 @@
+#测试环境配置
+server:
+  #端口
+  port: 80
+  context-path: /
+spring:
+#  mybatis:
+#    mapperPackage: /mapper/*/*Mapper.xml
+#    dialect: mysql  
+  jpa:  
+    database: mysql  
+    show-sql: true  
+  datasource:  
+      url: jdbc:mysql://bdm248798114.my3w.com:3306/bdm248798114_db?useUnicode=true&characterEncoding=utf-8&useSSL=true&autoReconnect=true&allowMultiQueries=true  
+      username: bdm248798114  
+      password: ${password}
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 15  
+    host: localhost  
+    port: 6379  
+    password:
+    # 连接超时时间（毫秒）
+    timeout: 0  
+    pool:
+      # 连接池最大连接数（使用负值表示没有限制）  
+      max-active: 8
+      # 连接池中的最大空闲连接  
+      max-idle: 8
+      # 连接池中的最小空闲连接  
+      min-idle: 0  
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: 10000
+      
+mybatis:
+  mapper-locations: /mapper/*/*Mapper.xml
+#日志
+logging:
+  config: classpath:logback-jk.xml
+  path: log
+
+#数据库密码加密
+#java -cp druid-1.0.24.jar com.alibaba.druid.filter.config.ConfigTools 你的密码
+publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJrU0EUUPGWjz4vPFRAQFcZxfTI1OdqXOE1YQScohYYegvxAey79+AE/57eAmF7/aZIomHdpPxEn7Jp1hvEfjv0CAwEAAQ==
+password: lumZDWk7AxbtWh8b/aomuHPmYyAY/9tzDzjneiqt4Ji1YOcyv6fivVrPZG8YO7VC4rVt50xG6DUjbPZOK6p0dw==
+
+PLAY:
+  UPLOAD:
+    IMAGE:
+      PATH: /usr/local/tomcat/webapps/upload
+      SIZE: 10485760
+      FILESUFFIX: png
+      SUFFIXS: jpg,jpeg,bmp,png,JPG,JPEG,BMP,PNG
+    VIDEO:
+      SIZE: 104857600
+      SUFFIXS: mp4,flv,rmvb,avi,MP4,FLV,RMVB,AVI
+  BLURIMAGE: 
+    WIDTH: 600
+    HEIGHT: 600
+    BLUR: 60
+    SMALLBLUR: 10
+    PRICE: 3
+    PRICEMIN: 2
+    RANDOM: 1
+    SCALE: 0.2
+  WECHAT: 
+#    APPID: wxf2e2669e9b5e12e4
+#    APPKEY: ENC(Tnp6q/nnsoUMZ69KM0PQeCpvFkx6c8i7zsCmSGwmkHAbtayZ40M99MSIYysV6n4V)
+    APPID: wx3b729d289c8f4cb6
+    APPKEY: ENC(uRLxMcEWgWHn3SBeIYiP6I0037YFPqguGfoURBsYUe2y+Gw0KbdhjdtCsmXQLY5o)
+    HOST: www.kangxinyiju.top/
+    MCHID: 1487008162

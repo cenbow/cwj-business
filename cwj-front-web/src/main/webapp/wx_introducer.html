@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+      <title>我推荐的人</title>
+      <link rel="stylesheet" type="text/css" href="css/api.css">
+      <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="css/wx_introducer.css">
+      <script src="js/fit_image.js" type="text/javascript" charset="utf-8"></script>
+   </head>
+   <body>
+   <span style="width: 80%;float: right;"></span>
+      <div class="records" id="records">
+      <div class="top-me">推荐二维码<div class="right">(<span style="color:red;">长按</span>保存到手机再转发给好友)</div></div>
+      <div class="sceneUrl"><img src="" alt="" id="sceneUrl"></div>
+      <div class="top-me">总共<span id="sum">0</span>人<span class="ticheng">对方提现的时候您可以分得<span class="bili" id="bili"></span><span class="bili">5%</span>提成</span></div>
+      <div class="no">您暂时还没有推荐过人哦！</div>
+         <script id="tmprecodes" type="text/x-dot-template">
+               <div class="rows clearfix">
+                  <div class="heaerImage">
+                     <img src="{{=it.headimgurl}}" onload="fitImage(this.parentNode,this)" />
+                  </div>
+                  <div class="content">
+                     <div class="name">
+                        <span>{{=it.nickName}}</span>
+						<span class="createtime">{{=it.createTime}}</span>
+                     </div>
+                  </div>
+            </div>
+         </script>
+<!--         <div class="top-me">推荐我的人</div>
+         <div class="rows clearfix">
+            <div class="heaerImage">
+               <img src="{{=it.}}" onload="fitImage(this.parentNode,this)" />
+            </div>
+            <div class="content">
+               <div class="name">
+                  <span>senny girlsenny girlsenny girl</span>
+                  <i class="girl"></i>
+               </div>
+            </div>
+         </div>
+         <div class="top-me">我推荐的人<span class="ticheng">提成比例<span style="color:#00cc00">2%</span></span></div>
+         <div class="rows clearfix">
+            <div class="heaerImage">
+               <img src="{{=it.headimgurl}}" onload="fitImage(this.parentNode,this)" />
+            </div>
+            <div class="content">
+               <div class="name">
+                  <span>{{=it.nickname}}</span>
+                  {{? it.sex == 1}}
+                     <i class="boy"></i>
+                  {{?? it.sex == 2}}
+                     <i class="girl"></i>
+                  {{??}}   
+                  {{?}}
+               </div>
+            </div>
+         </div> -->
+      </div>
+      <script src="js/dot.min.js"></script>
+      <script src="js/zepto.min.js"></script>
+      <script src="js/myc.js"></script>
+      <script src="js/wx_introducer.js"></script>
+</body></html>

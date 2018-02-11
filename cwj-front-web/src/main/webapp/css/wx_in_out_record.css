@@ -1,0 +1,184 @@
+html, body {
+	background-color: #fff;
+}
+
+.rows {
+	padding: 15px 15px 15px 70px;
+	position: relative;
+	background-color: #fff;
+}
+
+.rows:after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	background-color: #e2e2e2;
+	transform: scaleY(0.5);
+	-webkit-transform: scaleY(0.5);
+}
+
+.rows_left {
+	position: absolute;
+	left: 12px;
+	top: 12px;
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+}
+
+.plusTitle, .numTitle, .ticheng, .tui {
+	font-size: 15px;
+	font-weight: 700;
+	height: 25px;
+}
+
+.plusTitle>i, .numTitle>i {
+	display: inline-block;
+	vertical-align: middle;
+	width: 20px;
+	height: 20px;
+	/* 				background-image: url(img/reward_rb.png); */
+	background-size: 20px 20px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.ticheng>i {
+	display: inline-block;
+	vertical-align: middle;
+	width: 20px;
+	height: 20px;
+	/* 				background-image: url(img/ticheng.png); */
+	background-size: 20px 20px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.tui>i {
+	display: inline-block;
+	vertical-align: middle;
+	width: 20px;
+	height: 20px;
+	/* 				background-image: url(img/tui.png); */
+	background-size: 20px 20px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.numTitle>i {
+	/* 				background-image: url(img/money_icon_min.png); */
+	
+}
+
+.plusTitle>span, .numTitle>span, .ticheng>span {
+	color: #D13922;
+	display: inline-block;
+	vertical-align: middle;
+	max-width: 70%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.tui>span {
+	color: #000;
+}
+
+.numTitle>span {
+	color: #FCC409;
+}
+
+.time span {
+	color: #888888;
+}
+
+.time .date {
+	margin-right: 10px;
+}
+
+.num {
+	position: absolute;
+	right: 12px;
+	top: 20px;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.plus span {
+	color: #D13922;
+}
+
+.tui_money span {
+	color: #000;
+}
+
+.minus span {
+	color: #000;
+}
+
+.icon {
+	font-size: 20px;
+	margin-right: 3px;
+}
+
+.footer_more {
+	line-height: 30px;
+	text-align: center;
+	color: #ccc;
+}
+
+.footer_more>i {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-image: url(img/loading1.gif);
+	background-size: 100% 100%;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+.no {
+	display: none;
+	font-size: 16px;
+	position: fixed;
+	width: 100%;
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.qingli {
+	padding: 10px 5px;
+	text-align: center;
+	border-top: solid 1px #f1f1f1;
+	display: none;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background-color: #fff;
+	z-index: 999;
+}
+
+.qingli-text {
+	width: 35px;
+	background-color: #f1f1f1;
+	border-radius: 5px;
+	text-align: center;
+	padding: 1px 0px;
+}
+
+.qingli-btn {
+	padding: 5px 10px;
+	margin-left: 5px;
+	background-color: #1fd21d;
+	border-radius: 5px;
+	color: #fff;
+}

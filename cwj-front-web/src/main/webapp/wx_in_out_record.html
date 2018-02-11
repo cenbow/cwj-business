@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+<title>收支明细</title>
+<link rel="stylesheet" href="css/weui.min.css">  
+<link rel="stylesheet" href="css/jquery-weui.css">
+<link rel="stylesheet" type="text/css" href="css/wx_in_out_record.css">
+<script src="js/fit_image.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<!-- body 顶部加上如下代码 -->
+	<div class="weui-pull-to-refresh__layer">
+	  <div class='weui-pull-to-refresh__arrow'></div>
+	  <div class='weui-pull-to-refresh__preloader'></div>
+	  <div class="down">下拉刷新</div>
+	  <div class="up">释放刷新</div>
+	  <div class="refresh">正在刷新</div>
+	</div>
+	<div id="interpolation">
+		<div class="no" id="no_data" style="display: none;">暂无收支明细！</div>
+		<script id="interpolationtmpl" type="text/x-dot-template">										
+				{{? it.pay_type == 0}} <!--支出-->
+				<div class="rows" data-key="{{=it.key}}" onclick="openContent(this)">	
+					<div class="rows_left">
+						<img src="{{=it.userHeadImage}}" onload="fitImage(this.parentNode,this)"   />
+					</div>
+					<div class="numTitle">
+						<i></i>
+						<span>您对"{{=it.userNickName}}"的打赏</span>							
+					</div>					
+					<div class="time"><span class="date">{{=it.pay_time}}</span></div>										
+					<div class="num minus"><span class="icon">-</span><span>{{=it.amount}}</span></div>
+				</div>	
+				{{?? it.pay_type == 1}}<!--收入-->
+				<div class="rows" data-key="{{=it.key}}" onclick="openContent(this)">
+					<div class="rows_left">
+						<img src="{{=it.userHeadImage}}" onload="fitImage(this.parentNode,this)"   />
+					</div>
+					<div class="plusTitle">
+						<i></i>
+						<span>收到{{=it.userNickName}}打赏</span>	
+					</div>					
+					<div class="time"><span class="date">{{=it.pay_time}}</span></div>										
+					<div class="num plus"><span class="icon">+</span><span>{{=it.amount}}</span></div>
+				</div>	
+				{{?? it.pay_type == 2}}<!--提现-->
+				<div class="rows" data-key="{{=it.key}}" onclick="openContent(this)">
+					<div class="rows_left">
+						<img src="{{=it.headimgurl}}" onload="fitImage(this.parentNode,this)"   />
+					</div>
+					<div class="numTitle">
+						<span style="color: #3062f3;">赏金提现(扣{{=it.tax}}手续费)</span>
+					</div>					
+					<div class="time"><span class="date">{{=it.pay_time}}</span></div>										
+					<div class="num minus"><span class="icon" style="color: #3062f3;">-</span><span style="color: #3062f3;">{{=it.amount}}</span></div>
+				</div>	
+				{{?? it.pay_type == 3}}<!--分享打赏-->
+				<div class="rows" data-key="{{=it.key}}" onclick="openContent(this)">
+					<div class="rows_left">
+						<img src="{{=it.headimgurl}}" onload="fitImage(this.parentNode,this)" />
+					</div>
+					<div class="plusTitle">		
+						<span style="color: #9dd99d;">收到系统赠送的额外打赏</span>	
+					</div>					
+					<div class="time"><span class="date">{{=it.pay_time}}</span></div>										
+					<div class="num plus"><span class="icon" style="color: #9dd99d;">+</span><span style="color: #9dd99d;">{{=it.amount}}</span></div>
+				</div>	
+				{{?? it.pay_type == 4}}<!--退还的赏金-->
+				<div class="rows" data-key="{{=it.key}}" onclick="openContent(this)">
+					<div class="rows_left">
+						<img src="{{=it.headimgurl}}" onload="fitImage(this.parentNode,this)"   />
+					</div>
+					<div class="plusTitle">
+						<i></i>
+						<span>收到"{{=it.nickName}}"退还的赏金</span>	
+					</div>					
+					<div class="time"><span class="date">{{=it.pay_time}}</span></div>										
+					<div class="num plus"><span class="icon">+</span><span>{{=it.amount}}</span></div>
+				</div>	
+
+				{{?? it.pay_type == 5}}
+				<div class="rows" data-key="{{=it.key}}" onclick="openContent(this)">
+					<div class="rows_left">
+						<img src="{{=it.headimgurl}}" onload="fitImage(this.parentNode,this)"   />
+					</div>
+					<div class="numTitle">
+						<span style="color: #3062f3;">内容审核费</span>
+					</div>					
+					<div class="time"><span class="date">{{=it.pay_time}}</span></div>										
+					<div class="num minus"><span class="icon" style="color: #3062f3;">-</span><span style="color: #3062f3;">{{=it.amount}}</span></div>
+				</div>
+
+				{{?? it.pay_type == 6}}
+				<div class="rows" data-key="{{=it.key}}" onclick="openContent(this)">
+					<div class="rows_left">
+						<img src="{{=it.userHeadImage}}" onload="fitImage(this.parentNode,this)"   />
+					</div>
+					<div class="ticheng">
+						<i></i>
+						<span>获得"{{=it.userNickName}}"的提成</span>	
+					</div>					
+					<div class="time"><span class="date">{{=it.pay_time}}</span></div>										
+					<div class="num plus"><span class="icon">+</span><span>{{=it.amount}}</span></div>
+				</div>
+
+				{{?? it.pay_type == 7}}
+				<div class="rows" data-key="{{=it.key}}" onclick="openContent(this)">
+					<div class="rows_left">
+						<img src="{{=it.headimgurl}}" onload="fitImage(this.parentNode,this)"   />
+					</div>
+					<div class="tui">
+						<i></i>
+						<span>系统退还{{=it.nickName}}</span>	
+					</div>					
+					<div class="time"><span class="date">{{=it.pay_time}}</span></div>										
+					<div class="num tui_money"><span class="icon">-</span><span>{{=it.amount}}</span></div>
+				</div>
+				{{?}}																			
+		</script>
+	</div>
+<div class="weui-loadmore">    
+    <i class="weui-loading"></i>    
+    <span class="weui-loadmore__tips">正在加载</span>    
+</div>
+<div class="weui-loadmore weui-loadmore_line" id="dot_data" style="display: none;">
+  <span class="weui-loadmore__tips">没有更多</span>
+</div>
+<script src="js/jquery_v2.1.4.min.js"></script>  
+<script src="js/jquery-weui.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/myc.js"></script>
+<script src="js/dot.min.js"></script>
+<script src="js/wx_in_out_record.js"></script>
+</body>
+</html>

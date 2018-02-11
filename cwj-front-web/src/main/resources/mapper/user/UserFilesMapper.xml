@@ -1,0 +1,29 @@
+<?xml version="1.0"  encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mm.dev.dao.mapper.user.UserFilesMapper">
+
+    	
+  	<delete id="deleteById">
+  		update t_user_files set del_flag = 2 where id = #{id}
+  	</delete>
+  	
+  	<select id="queryBlurInfoById" resultType="map">
+  		SELECT 
+			t.id,
+			t.`file_path` as filePath,
+			t.blur_file_path as blurFilePath,
+			t.title,
+			t.open_id as openId,
+			t.price,
+			u.headimgurl,
+			u.nick_name as nickName
+		FROM 
+			t_user_files t 
+		left join
+			t_user u
+		on
+			t.open_id = u.open_id
+		WHERE 
+			t.`id` = #{id}
+  	</select>
+</mapper>
